@@ -14,6 +14,10 @@ w = [2, 7, 9]
 def vector_add(v, w):
 	return [v_i + w_i for v_i, w_i in zip(v, w)]
 
+def vector_substract(v, w):
+    """substracts cooresponding elements."""
+    return [v_i - w_i for v_i, W_i in zip(v, w)]
+
 def vector_sum(vectors):
     #sum all cooresponding elements
 	result = vectors[0]
@@ -55,4 +59,8 @@ print(dot(v,w))
 def sum_of_squares(v):
     return dot(v, v)
 print(sum_of_squares(v))
+ 
+def squared_distance(v, w):
+    """(v_i, w_i)**2 + ... + (v_n - w_n)**2"""
+    return sum_of_squares(vector_substract(v, w))
 
