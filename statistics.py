@@ -9,8 +9,10 @@ Created on Sun Dec 30 20:16:17 2018
 
 from collections import Counter
 from matplotlib import pyplot as plt
+from vectors import sum_of_squares
+from math import sqrt
 
-num_friends = [100, 49, 41, 40, 25, 25, 100,
+num_friends = [100, 49, 41, 40, 25, 25, 100, 100,
                #...and lots more
                ]
 friends_counts = Counter(num_friends)
@@ -47,3 +49,44 @@ def median(v):
         return (sorted_v[lo] + sorted_v[hi])/2
 
 print(median(num_friends))
+
+
+#Quantile, represents the values less than which a certain
+#persentage of the data lies.
+def quantile(x, p):
+    """returns the pth-percentile values in x."""
+    p_index = int(p * len(x))
+    return sorted(x)[p_index]
+print(quantile(num_friends, 0.1))
+
+# Mode, the most common values
+def mode(x):
+    """returns a list, might be more tha one mode"""
+    counts = Counter(x)
+    max_count = max(counts.values())
+    return [x_i for x_i, count in counts.items()
+            if count == max_count]
+
+
+#Dispersion, how spread out the data is.
+#A measure of dispersion is the variance.
+def de_mean(x):
+    """translate x by substracting its mean."""
+    x_bar = mean(x)
+    return [x_i - x_bar for x_i in x]
+
+def variance(x):
+    """assumes x has at least two elements."""
+    n = len(x)
+    deviations = de_mean(x)
+    return sum_of_squares(deviations) / (n - 1)
+
+def standard_deviation(x):
+    return sqrt(variance(x))
+
+print(standard_deviation(num_friends))
+    
+
+
+
+
