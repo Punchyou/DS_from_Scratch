@@ -9,7 +9,7 @@ Created on Sun Dec 30 20:16:17 2018
 
 from collections import Counter
 from matplotlib import pyplot as plt
-from vectors import sum_of_squares
+from vectors import sum_of_squares, dot
 from math import sqrt
 
 num_friends = [100, 49, 41, 40, 25, 25, 100, 100,
@@ -91,3 +91,28 @@ def interquartile_range(x):
     return quantile(x, 0.75) - quantile(x, 0.25)
 
 print(interquartile_range(num_friends))
+
+#Correlation
+daily_mins = [50, 23, 24, 22, 27, 29, 70, 65] #the mins that a user
+#spends on a social media site
+def covariance(x, y):
+    """how two variables vary in tandem from their means"""
+    n = len(x)
+    return dot(de_mean(x), de_mean(y)) / (n - 1)
+
+print(covariance(num_friends, daily_mins))
+
+#Its difficult to say what counts as a "large" covariance.
+#That's why we use correlation
+
+def correlation(x, y):
+    stdev_x = standard_deviation(x)
+    stdev_y = standard_deviation(y)
+    if stdev_x > 0 and stdev_y > 0:
+        return covariance(x, y) / stdev_x /stdev_y
+    else:
+        return 0
+print(correlation(num_friends, daily_mins))
+
+plt.scatter(num_friends, daily_mins)
+plt.show()

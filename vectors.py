@@ -47,11 +47,11 @@ def vector_mean(v, w):
     return scalar_mulltiply(1/n, vector_sum(vectors))
 
 # the sum of vectors' coorespondingwise products - The dot product
-''' The dot product measure the length of the vector you'd get
+''' The dot product measures the length of the vector you'd get
     if you projected v onto w.'''
 def dot(v, w):
     """v_1*w_1 + v_2*w_2 + ... + v_n*w_n"""
-    return sum(v_i*w_i for v_i, w_i in zip(v,w))
+    return sum(v_i*w_i for v_i, w_i in zip(v, w))
 
 print(dot(v,w))
 
