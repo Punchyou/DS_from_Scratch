@@ -15,7 +15,7 @@ both_girls = 0
 older_girl = 0
 either_girl = 0
 
-seed(0) # seed() returns a different sequence of values
+seed(5) # seed() returns a different sequence of values
 
 for _ in range(10000):
     younger = random_kid()
@@ -28,5 +28,3 @@ for _ in range(10000):
         either_girl += 1
 print("P(both | older): ", both_girls / older_girl)
 print("P(both | either: ", both_girls / either_girl)
-
-
