@@ -62,4 +62,19 @@ while True:
     next_v = step(v, gradient, -0.01) #take a negtive gradient step
     if distance(next_v, v) < tolerance: #stop if you are converging
         break
-    v = next_v #continue of you're not
+    v = next_v #continue if you're not
+
+"""Choosing the right step_size"""
+"""Some step sizes can result invalid inputs for functions.
+ avoid this, we create a safe apply function."""
+ 
+def safe(f):
+    """return new function that's the sme as f,
+    except htat it outputs infinity whenever
+    f produces an error"""
+    def safe_f(*args, **kwargs):
+        try:
+            return f(*args, **kwargs)
+        except:
+            return flot('inf')
+    return safe_f
