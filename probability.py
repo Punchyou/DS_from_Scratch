@@ -30,8 +30,8 @@ for _ in range(10000):
         both_girls += 1
     if older == "girl" or younger == "girl":
         either_girl += 1
-print("P(both | older): ", both_girls / older_girl)
-print("P(both | either: ", both_girls / either_girl)
+#print("P(both | older): ", both_girls / older_girl)
+#print("P(both | either: ", both_girls / either_girl)
 
 """The density function"""
 def uniform_pdf(x):
@@ -60,7 +60,7 @@ plt.plot(xs, [normal_pdf(x, sigma=0.5) for x in xs], ':', label = 'mu=0, sigma=0
 plt.plot(xs, [normal_pdf(x, mu = -1) for x in xs], '-.', label = 'mu=-1, sigma=1')
 plt.legend()
 plt.title("Various Normal pdfs")
-plt.show()
+#plt.show()
 
 """The norms cdfs"""
 def normal_cdf(x, mu=0, sigma=1):
@@ -72,7 +72,7 @@ plt.plot(xs, [normal_cdf(x, sigma=0.5) for x in xs], ':', label = 'mu=0, sigma=0
 plt.plot(xs, [normal_cdf(x, mu = -1) for x in xs], '-.', label = 'mu=-1, sigma=1')
 plt.legend(loc = 4) #bottom right
 plt.title("Various Normal cdfs")
-plt.show()
+#plt.show()
 
 """Invert normal_cdf to find the values corresponding to specific probabiity.
 This function repeatedly bisects intervals until it narrows in on a Z
@@ -128,7 +128,7 @@ def make_hist(p, n, num_points):
         for i in xs]
     plt.plot(xs, ys)
     plt.title("Binomial Distribution vs. Normal Approximation")
-    plt.show()
+    #plt.show()
 
-make_hist(0.75, 100, 10000)
+#make_hist(0.75, 100, 10000)
     
