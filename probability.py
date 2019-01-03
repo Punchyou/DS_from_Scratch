@@ -8,6 +8,9 @@ Created on Wed Jan  2 20:47:42 2019
 
 """A family with two unknown children."""
 from random import choice, seed
+from math import sqrt, exp, pi
+from matplotlib import pyplot as plt
+
 def random_kid():
     return choice(["boy", "girl"])
 
@@ -28,3 +31,32 @@ for _ in range(10000):
         either_girl += 1
 print("P(both | older): ", both_girls / older_girl)
 print("P(both | either: ", both_girls / either_girl)
+
+"""The density function"""
+def uniform_pdf(x):
+    return 1 if x >= 0 and x <1 else 0
+
+"""The cumulative distribution function"""
+def uniform_cfd(x):
+    """returns the probbility that a uniform random vroable
+    is <= x"""
+    if x<0:
+        return 0
+    elif x < 1:
+        return x
+    else:
+        return 1
+
+"""The normal Distribution"""
+def normal_pdf(x, mu = 0, sigma = 1):
+    sqrt_two_pi = sqrt(2 * pi)
+    return (exp(-(x - mu) ** 2 / 2 / sigma ** 2) / (sqrt_two_pi * sigma))
+
+xs = [x / 10.0 for x in range(-50, 50)]
+plt.plot(xs, [normal_pdf(x, sigma=1) for x in xs], '-', label = 'mu=0, sigma=1')
+plt.plot(xs, [normal_pdf(x, sigma=2) for x in xs], '--', label = 'mu=0, sigma=2')
+plt.plot(xs, [normal_pdf(x, sigma=0.5) for x in xs], ':', label = 'mu=0, sigma=0.5')
+plt.plot(xs, [normal_pdf(x, mu = -1) for x in xs], '-.', label = 'mu=-1, sigma=1')
+plt.legend()
+plt.title("Various Normal pdfs")
+plt.show()    
