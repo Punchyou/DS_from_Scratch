@@ -72,3 +72,27 @@ plt.plot(xs, [normal_cdf(x, mu = -1) for x in xs], '-.', label = 'mu=-1, sigma=1
 plt.legend(loc = 4) #bottom right
 plt.title("Various Normal cdfs")
 plt.show()
+
+"""Invert normal_cdf to find the values corresponding to specific probabiity.
+This function repeatedly bisects intervals until it narrows in on a Z
+tht's close enough to the desired probability."""
+def inverse_normal_cdf(p, mu=0, sigma=1, tolerance=0.00001):
+    """find pproximte inverse using binry search."""
+    
+    #if not standard, compute standard nd rescale
+    if mu !=0 or sigma !=1:
+        return mu + sigma * inverse_normal_cdf(p, tolerance=tolerance)
+    
+    low_z = -10.0 #normal_cdf(-10) is close to 0
+    hi_z = 10.0 #norml_cfd(10) is close to 1
+    while hi_z - low_z > tolerance:
+        mid_z = (low_z + hi_z) / 2 #the midpoint
+        mid_p = normal_cdf(mid_z) #and the cdf's value there
+        if mid_p < p:
+            #midpoint still too low, search above it
+            low_z = mid_z
+        elif mid_p > p:
+            #midpoint still to high
+            hi_z = mid_z
+        else:
+            break
