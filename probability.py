@@ -7,9 +7,10 @@ Created on Wed Jan  2 20:47:42 2019
 """Conditionl Probabilities."""
 
 """A family with two unknown children."""
-from random import choice, seed
+from random import choice, seed, random
 from math import sqrt, exp, pi, erf
 from matplotlib import pyplot as plt
+from collections import Counter
 
 def random_kid():
     return choice(["boy", "girl"])
@@ -96,3 +97,38 @@ def inverse_normal_cdf(p, mu=0, sigma=1, tolerance=0.00001):
             hi_z = mid_z
         else:
             break
+
+"""The central limit theorem - For large n sampe of samples, the distribution
+of means for the samples of samples is approximatelly normal."""
+"""A Bernouli variable is the sum of n independent bernouli random variables,
+each of which equals 1 with probability p and 0 with probability 1 - p."""
+def bernouli_trial(p):
+    return 1 if random() < p else 0
+
+def binomial(n, p):
+    return sum(bernouli_trial(p) for _ in range(n))
+
+"""Ploting the binomial and normal distributions."""
+def make_hist(p, n, num_points):
+    data = [binomial(n, p) for _ in range(num_points)]
+    
+    #use a bar chrt to show the actual binomial samples
+    histogram = Counter(data)
+    plt.bar([x - 0.4 for x in histogram.keys()],
+             [v / num_points for v in histogram.values()],
+             0.8,
+             color='0.75')
+    
+    mu = p * n
+    sigma = sqrt(n * p * ( 1 - p))
+    
+    #use a line to show the normal approximation
+    xs = range(min(data), max(data) + 1)
+    ys = [normal_cdf(i + 0.5, mu, sigma) - normal_cdf(i - 0.5, mu, sigma)
+        for i in xs]
+    plt.plot(xs, ys)
+    plt.title("Binomial Distribution vs. Normal Approximation")
+    plt.show()
+
+make_hist(0.75, 100, 10000)
+    
