@@ -78,7 +78,7 @@ plt.title("Various Normal cdfs")
 This function repeatedly bisects intervals until it narrows in on a Z
 tht's close enough to the desired probability."""
 def inverse_normal_cdf(p, mu=0, sigma=1, tolerance=0.00001):
-    """find pproximte inverse using binry search."""
+    """find approximate inverse using binary search."""
     
     #if not standard, compute standard nd rescale
     if mu !=0 or sigma !=1:
@@ -97,7 +97,7 @@ def inverse_normal_cdf(p, mu=0, sigma=1, tolerance=0.00001):
             hi_z = mid_z
         else:
             break
-
+        return mid_z
 """The central limit theorem - For large n sampe of samples, the distribution
 of means for the samples of samples is approximatelly normal."""
 """A Bernouli variable is the sum of n independent bernouli random variables,
@@ -131,4 +131,3 @@ def make_hist(p, n, num_points):
     #plt.show()
 
 #make_hist(0.75, 100, 10000)
-    
