@@ -9,6 +9,7 @@ import math
 from collections import Counter
 import random
 from probability import inverse_normal_cdf
+from statistics import correlation
 import matplotlib.pyplot as plt
 
 """Group the data into descrete buckets and count how many fall into each bucket."""
@@ -36,3 +37,27 @@ normal = [57 * inverse_normal_cdf(random.random()) for _ in range(10000)]
 
 plot_histogram(uniform, 10, 'Uniform Histogram')
 plot_histogram(normal, 10, 'Normal Histogram')
+
+"""Two-Domentional data"""
+def random_normal():
+    '''returns a random draw from a stndard normal distribution'''
+    return inverse_normal_cdf(random.random())
+
+xs = [random_normal() for _ in range(1000)]
+ys1 = [x + random_normal() for x in xs]
+ys2 = [-x + random_normal() for x in xs]
+
+plot_histogram(ys1, 10, 'ys1')
+plot_histogram(ys2, 10, 'ys2')
+
+
+plt.scatter(xs, ys1, marker='.', color= 'black', label='ys1')
+plt.scatter(xs, ys2, marker='.', color= 'grey', label='ys2')
+plt.xlabel('xs')
+plt.ylabel('ys1, ys2')
+plt.legend(loc=9)
+plt.title('Very Different Joint Distributions')
+plt.show()
+
+print(correlation(xs, ys1))
+print(correlation(xs, ys2))

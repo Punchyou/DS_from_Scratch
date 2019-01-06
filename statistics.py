@@ -112,7 +112,7 @@ def correlation(x, y):
         return covariance(x, y) / stdev_x /stdev_y
     else:
         return 0
-print(correlation(num_friends, daily_mins))
+print("Correlation num_friends, daily_mins: ", correlation(num_friends, daily_mins))
 
 plt.scatter(num_friends, daily_mins)
 plt.show()
