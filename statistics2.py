@@ -111,7 +111,7 @@ def correlation(x, y):
     if stdev_x > 0 and stdev_y > 0:
         return covariance(x, y) / stdev_x /stdev_y
     else:
-        return 0
+        return 0 # if no variation correlaition is zero
 print("Correlation num_friends, daily_mins: ", correlation(num_friends, daily_mins))
 
 plt.scatter(num_friends, daily_mins)
