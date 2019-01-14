@@ -6,6 +6,7 @@ This is a temporary script file.
 """
 
 from functools import partial, reduce
+import math
 
 vectors = [[1, 3, 5], [3,5,9], [2,4,8]]
 v = [3,4,7]
@@ -16,7 +17,7 @@ def vector_add(v, w):
 
 def vector_substract(v, w):
     """substracts cooresponding elements."""
-    return [v_i - w_i for v_i, W_i in zip(v, w)]
+    return [v_i - w_i for v_i, w_i in zip(v, w)]
 
 def vector_sum(vectors):
     #sum all cooresponding elements
@@ -63,4 +64,7 @@ print(sum_of_squares(v))
 def squared_distance(v, w):
     """(v_i, w_i)**2 + ... + (v_n - w_n)**2"""
     return sum_of_squares(vector_substract(v, w))
+
+def distance(w, v):
+    return math.sqrt(squared_distance(v, w))
 

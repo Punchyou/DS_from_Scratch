@@ -76,7 +76,7 @@ def safe(f):
         try:
             return f(*args, **kwargs)
         except:
-            return flot('inf')
+            return float('inf')
     return safe_f
 
 """Putting it all together"""
@@ -84,13 +84,13 @@ def minimize_batch(target_fn, gradient_fn, theta_0, tolerance=0.000001):
     """use gradient descent to find theta that minimizes trget function"""
     step_sizes = [100, 10, 1, 0.1, 0.01, 0.001, 0.0001, 0.00001]
     theta = theta_0 #initial value of theta
-    target_fn = safe_f(target_fn) #safe version of target_fn
+    target_fn = safe(target_fn) #safe version of target_fn
     value = target_fn(theta) #value we're minimizing
     
     while True:
-        gradient = grdient_fn(theta)
-        next_thetas = [step(theta, gradient, -step_size
-                            for step_size in step_sizes)]
+        gradient = gradient_fn(theta)
+        next_thetas = [step(theta, gradient, (-step_size
+                            for step_size in step_sizes))]
         
     #choose the one that minimizes the error function
     next_theta = min(next_thetas, key=target_fn)
